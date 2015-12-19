@@ -1,0 +1,48 @@
+var xPositions = [200];
+var yPositions = [0];
+
+draw = function() {
+    var s = second();
+    if (mouseIsPressed) {
+        xPositions.push (mouseX);
+        yPositions.push (0);
+        }
+    if(s <= 30 && s >= 0) {
+        fill(255, 255, 255);
+        background(147, 152, 153);
+        image(getImage("cute/DirtBlock"),0,180);
+        image(getImage("cute/DirtBlock"),100,180);
+        image(getImage("cute/DirtBlock"),200,180);
+        image(getImage("cute/DirtBlock"),300,180);
+        image(getImage("cute/DirtBlock"),100,261);
+        image(getImage("cute/DirtBlock"),200,261);
+        image(getImage("cute/DirtBlock"),300,261);
+        image(getImage("cute/DirtBlock"),0,261);
+        image(getImage("cute/Rock"),12,190);
+    }
+    else if(s <= 59 && s > 30){
+        background(0, 250, 88);
+        fill(4, 141, 204);
+        image(getImage("cute/GrassBlock"),0,180);
+        image(getImage("cute/DirtBlock"),100,180);
+        image(getImage("cute/GrassBlock"),200,180);
+        image(getImage("cute/DirtBlock"),300,180);
+        image(getImage("cute/GrassBlock"),100,261);
+        image(getImage("cute/DirtBlock"),200,261);
+        image(getImage("cute/GrassBlock"),300,261);
+        image(getImage("cute/DirtBlock"),0,261);
+        image(getImage("cute/TreeTall"),12,251);
+        image(getImage("cute/TreeShort"),206,261);
+        image(getImage("cute/TreeUgly"),256,180);
+    }
+    for (var i = 0; i < xPositions.length; i++) {
+        noStroke();
+        ellipse(xPositions[i], yPositions[i], random(5,10), random(5,10));
+        if(yPositions[i] === 400){
+            yPositions[i] = 0;
+        } else {
+        yPositions[i] += 2;
+        }
+    }
+};
+//note: Pics only on Khan Acad.
