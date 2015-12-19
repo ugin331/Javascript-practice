@@ -20,6 +20,7 @@ draw = function() {
         image(getImage("cute/DirtBlock"),0,261);
         image(getImage("cute/Rock"),12,190);
     }
+    //if 30 sec has passed from the start of program, change to spring.
     else if(s <= 59 && s > 30){
         background(0, 250, 88);
         fill(4, 141, 204);
