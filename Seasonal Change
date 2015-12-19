@@ -31,6 +31,7 @@ draw = function() {
         image(getImage("cute/DirtBlock"),200,261);
         image(getImage("cute/GrassBlock"),300,261);
         image(getImage("cute/DirtBlock"),0,261);
+        image(getImage("cute/Rock"),12,175);
         image(getImage("cute/TreeTall"),12,251);
         image(getImage("cute/TreeShort"),206,261);
         image(getImage("cute/TreeUgly"),256,180);
