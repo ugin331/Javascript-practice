@@ -1,3 +1,5 @@
+//images from ka
+
 //draw the border of the phone
 fill(74, 98, 217);
 rect(20,0,320,400);
