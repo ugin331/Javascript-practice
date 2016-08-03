@@ -1,0 +1,413 @@
+//draw the border of the phone
+fill(74, 98, 217);
+rect(20,0,320,400);
+//powa Button
+stroke(0, 0, 0);
+rect(340, 15, 7, 53);
+//draw the screen
+stroke(255, 255, 255);
+fill(0, 0, 0);
+rect(40, 20, 280,360);
+//the bar at the bottom
+fill(36, 32, 36);
+rect(40, 340, 280, 40);
+fill(0, 0, 0);
+triangle(50, 375, 65, 350, 80, 375);
+rect(160, 350, 40, 20);
+ellipse(295, 360, 20, 20);
+//the applications stored in an object
+var Apps = {
+    name1: "MindKraft",
+    name2: "Mini Pet Shoppe",
+    name3: "BitCoin Beggar",
+    name4: "MiniPolis",
+    name5: "Khan Academy",
+    icon1: getImage("cute/GrassBlock"),
+    icon2: getImage("creatures/Hopper-Jumping"),
+    icon3: getImage("cute/GemOrange"),
+    icon4: getImage("cute/WallBlock"),
+    icon5: getImage("avatars/leaf-green")
+};
+var Camera = function(x, y, w, h, viewX, viewY, levelWidth, levelHeight, speed) {
+    // Viewport on canvas
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+
+    // Inside the viewport
+    this.viewX = viewX;
+    this.viewY = viewY;
+    this.levelWidth = levelWidth;
+    this.levelHeight = levelHeight;
+
+    this.speed = this.speed || speed; // the lower the number, the faster the speed
+}; // made by thomas l
+Camera.prototype.follow = function(ent) {
+    var x = -ent.x + this.x + (this.w / 2) - (ent.w / 2);
+    var y = -ent.y + this.y + (this.h / 2) - (ent.h / 2);
+    var a = atan2(y - this.viewY, x - this.viewX);
+    var v = dist(x, y, this.viewX, this.viewY) / this.speed;
+
+    this.viewX += v * cos(a);
+    this.viewY += v * sin(a);
+
+    var width = this.x + this.w - this.levelWidth;
+    var height = this.y + this.h - this.levelHeight;
+
+    this.viewX = min(this.viewX, this.x);
+    this.viewX = max(this.viewX, width);
+    this.viewY = min(this.viewY, this.y);
+    this.viewY = max(this.viewY, height);
+};
+Camera.prototype.view = function(ent) {
+    var viewX = -this.viewX + this.x,
+        viewY = -this.viewY + this.y,
+        viewW = ent.w - this.w,
+        viewH = ent.w - this.h;
+
+    if (ent.x > viewX - ent.w &&
+        ent.x < viewX - viewW + ent.w &&
+        ent.y > viewY - ent.h &&
+        ent.y < viewY - viewH + ent.h) {
+        var camView = {
+            x: (this.viewX + ent.x),
+            y: (this.viewY + ent.y),
+            w: ent.w,
+            h: ent.h,
+            cam: this
+        };
+
+        return camView;
+    }
+};
+var x = 50;
+var y = 100;
+var screen = 0;
+var x = 193;
+var username = "bullet331";
+var boxX = 43;
+var mouseClicked=function(){
+    //rect(145, 40, 45, 45);\
+    //Mini Pet Shoppe
+    if(mouseIsPressed && mouseX > 145 && mouseX < 190 && mouseY > 40 && mouseY < 85 && screen === 1)
+    {
+        screen = 21;
+        mouseIsPressed = false;
+        println("asdf4");
+    }
+    if(mouseIsPressed && mouseX > 110 && mouseX < 230 && mouseY > 120 && mouseY < 180 && screen === 21)
+        {
+            screen=22;
+            //println("asdf");
+        }
+        //MindKraft
+    if(mouseIsPressed && mouseX > 60 && mouseX < 105 && mouseY > 40 && mouseY < 85 && screen === 1) 
+    {
+        screen = 2;
+        mouseIsPressed=false;
+        println("asdf3");
+    }
+    if(mouseIsPressed && mouseX > 110 && mouseX < 230 && mouseY > 120 && mouseY < 180 && screen === 2)
+        {
+            println(mouseIsPressed);
+            println("registered");
+            screen = 3;
+        }
+    //KA
+    if(mouseIsPressed && mouseX > 110 && mouseX < 230 && mouseY > 120 && mouseY < 180 && screen === 4)
+        {
+            screen=5;
+            //println("asdf");
+        }
+        if(mouseIsPressed && mouseX > 145 && mouseX < 185 && mouseY > 120 && mouseY < 165 && screen === 1) {
+            screen = 4;
+            mouseIsPressed=false;
+            println("asdf2");
+            
+    }
+    
+};
+var MPSfunction = function(){
+    if(screen === 23){
+        keyIsPressed=false;
+        fill(150, 218, 235);
+        rect(40, 20, 280, 320);
+        fill(227, 223, 223);
+        rect(40, 200, 280, 140);
+        rect(40, 270, 280, 70);
+        fill(0, 0, 0);
+        image(getImage("creatures/Hopper-Cool"), x, 200);
+        text("Hi! Welcome to Mini Pet Shoppe!",55, 100);
+        text("Press any Key to Continue.", 55, 140);
+        if(keyIsPressed){
+                println("beating");
+                screen = 24;
+        }
+    }
+    if(screen === 24){
+        keyIsPressed=false;
+        fill(150, 218, 235);
+        rect(40, 20, 280, 320);
+        fill(227, 223, 223);
+        rect(40, 200, 280, 140);
+        rect(40, 270, 280, 70);
+        fill(0, 0, 0);
+        image(getImage("creatures/Hopper-Cool"), x, 200);
+        text("Get Ready for a Pet Shoppe Adventure!",40, 100);
+        text("Press any Key to Continue.", 55, 140);
+        if(keyIsPressed){
+                println("beating");
+                screen = 25;
+        }
+    }
+};
+var MPSWelcome = function(){
+    if(screen===22){
+        textSize(17);
+        fill(235, 164, 228);
+        rect(40, 20, 280, 320);
+        image(getImage("creatures/Hopper-Happy"), 115, 181);
+        fill(0, 0, 0);
+        text("Welcome to Mini Pet Shoppe!(tm)(r)", 46, 100);
+        text("Press Any Key to continue!", 77, 150);
+        if(keyIsPressed){
+            //if(key.code === 13 && screen === 22){
+                println("beating");
+                screen = 23;
+            //}
+        }
+        MPSfunction();
+    }
+};
+var MPShome = function(){
+    if(screen === 21)
+    {
+        println("it works!");
+        fill(235, 164, 228);
+        rect(40, 20, 280, 320);
+        fill(0, 0, 0);
+        textSize(20);
+        text("Mini Pet Shoppe", 100, 100);
+        fill(108, 210, 230);
+        rect(110, 120, 120, 60);
+        fill(0, 0, 0);
+        textSize(40);
+        text("Play", 130, 160);
+        image(getImage("cute/GrassBlock"), 125, 261, 100, 80);
+        image(getImage("cute/GrassBlock"), 40, 261, 100, 80);
+        image(getImage("cute/GrassBlock"), 219, 261, 100, 80);
+        image(getImage("creatures/Hopper-Happy"), 115, 181);
+    }
+    MPSWelcome();
+};
+var MKfunction = function(){
+    if(screen === 3){
+        var s = second();
+        var rand = random(40, 300);
+        var rand2 = random(30, 120);
+        println("it works");
+        getImage("cute/CharacterBoy");
+            if(s <= 30 && s >= 0) {
+            fill(93, 168, 222);
+            rect(40, 20, 280, 320);
+            fill(245, 235, 52);
+            rect(61, 40, 100, 100, 20);
+            }
+            else if(s <= 59 && s > 30){
+                fill(43, 40, 43);
+                rect(40, 20, 280, 320);
+                fill(176, 166, 166);
+                fill(251, 255, 0);
+                for(var i=0; i<=10; i++){
+                    rect(rand, rand2, 20, 20, 20);
+                }
+                fill(240, 237, 237);
+                rect(61, 40, 100, 100, 20);
+            }
+            image(getImage("cute/DirtBlock"), 40, 170);
+            image(getImage("cute/DirtBlock"),220, 170);
+            image(getImage("cute/DirtBlock"), 130, 170);
+            image(getImage("cute/GrassBlock"), 40, 130);
+            image(getImage("cute/GrassBlock"), 220, 130);
+            image(getImage("cute/GrassBlock"), 130, 130);
+            var Player = getImage("cute/CharacterBoy");
+                image(Player, x, y);
+                if (keyIsPressed)
+                {
+                    if(keyCode===LEFT){
+                        x-=5;
+                        println("left");
+                    }
+                    if(keyCode === RIGHT){
+                        x+=5;
+                        println("right");
+                    }
+                    /*if(keyCode===UP&&screen===3){
+                        for(var i = 0; i<3; i++){
+                            y+=2;
+                        }
+                        for(var i = 0; i<3; i++){
+                            y-=2;
+                        }
+                    }*/
+                }
+                if(x<20){
+                    x=21;
+                }
+                if(x>240){
+                    x=239;
+                }
+    }
+};
+    
+var MKhome = function(){
+    //if(mouseIsPressed && mouseX > 60 && mouseX < 105 && mouseY > 40 && mouseY < 85 && screen === 1) {
+        //screen = 2;
+        if(screen===2){
+        fill(0, 196, 255);
+        rect(40, 20, 280, 320);
+        image(getImage("cute/DirtBlock"), 40, 170);
+        image(getImage("cute/DirtBlock"),220, 170);
+        image(getImage("cute/DirtBlock"), 130, 170);
+        image(getImage("cute/GrassBlock"), 40, 130);
+        image(getImage("cute/GrassBlock"), 220, 130);
+        image(getImage("cute/GrassBlock"), 130, 130);
+        fill(0, 0, 0);
+        textSize(60);
+        text("MindKraft", 50, 100);
+        fill(150, 141, 141);
+        rect(110, 120, 120, 60);
+        fill(0, 0, 0);
+        textSize(40);
+        text("Play", 130, 160);
+        //println(mouseIsPressed);
+        /*if(mouseIsPressed && mouseX > 110 && mouseX < 230 && mouseY > 120 && mouseY < 180 && screen === 2)
+        {
+            println(mouseIsPressed);
+            println("registered");
+            screen = 3;
+        }*/
+        }
+        MKfunction();
+    //}
+};
+var KAhomescreen = function(){
+    if(screen === 5){
+        //println("asdfasdFAsdfasdfa");
+        fill(255, 255, 255);
+        rect(40, 20, 280, 320);
+        fill(0,0,0);
+        text("Welcome, " + username, 105, 55);
+        text("Subjects:", 60, 100);
+        fill(91, 181, 191);
+        text("Math", 60, 122);
+        stroke(0, 0, 0);
+        rect(60, 140, 80, 60);
+        rect(160, 140, 80, 60);
+        rect(260, 140, 60, 60);
+        fill(0, 0, 0);
+        text("Gr 1", 78, 176);
+        text("Gr 2", 174, 176);
+        text("Gr 3", 270, 176);
+        fill(179, 77, 91);
+        text("Science", 60, 232);
+        stroke(0, 0, 0);
+        rect(60, 250, 80, 60);
+        rect(160, 250, 80, 60);
+        rect(260, 250, 60, 60);
+        fill(0, 0, 0);
+        text("Chemistry", 65, 285);
+        text("Physics", 165, 285);
+        text("Biolog", 270, 286);
+        /*for(var a=0;a<=4; a++){
+            rect(boxX, 10, 80, 60);
+            boxX+=30;
+        }
+        if(boxX>300){
+            boxX = 43;
+        }*/
+    }
+};
+var KAhome = function(){//Khan Academy Application
+        //if(mouseIsPressed && mouseX > 145 && mouseX < 185 && mouseY > 120 && mouseY < 165 && screen === 1) {
+            //screen = 4;
+            if(screen===4){
+            //println("-----");
+            fill(255, 255, 255);
+            rect(40, 20, 280, 320);
+            fill(0, 0, 0);
+            textSize(20);
+            text("Khan Academy", 100, 100);
+            image(getImage("avatars/leaf-green"), 110, 200);
+            fill(150, 141, 141);
+            rect(110, 120, 120, 60);
+            fill(0, 0, 0);
+            textSize(16);
+            text("Begin Learning!", 115, 160);
+            
+            //println("end of screen 4");
+        }
+        /*if(mouseIsPressed && mouseX > 110 && mouseX < 230 && mouseY > 120 && mouseY < 180 && screen === 4)
+        {
+            screen=5;
+            //println("asdf");
+        }*/
+        KAhomescreen();
+    };
+
+var c = new Camera();
+var draw = function() {
+    textSize(16);
+    fill(0, 0, 0);
+    text("CTRL to turn off, SHIFT to turn on", 359, 200);
+    if(screen ===0)
+    {
+        fill(0, 0, 0);
+        rect(40,20,280,360);
+        playSound(getSound("rpg/metal-clink"));
+    }
+    //turning the phone off
+    if(keyIsPressed && keyCode === CONTROL) {
+        screen = 0;
+    }//turning the phone on and home screen
+    else if(keyIsPressed && keyCode === SHIFT && screen >= 0){
+        screen = 1;
+        textSize(12);
+        fill(0, 0, 0);
+        rect(40, 20, 280,360);
+        rect(40, 340, 280,40);
+        triangle(50, 375, 65, 350, 80, 375);
+        rect(160, 350, 40, 20);
+        ellipse(295, 360, 20, 20);
+        fill(255, 255, 255);
+        mouseClicked();
+        //Mindkraft
+        rect (60, 40, 45, 45);
+        image(Apps.icon1, 60, 25, 45,60);
+        text(Apps.name1, 58, 103);
+        //Mini Pet Shoppe
+        fill(204, 96, 136);
+        rect(145, 40, 45, 45);
+        image(Apps.icon2, 145, 40, 45, 45);
+        fill(255, 255, 255);
+        text(Apps.name2, 120, 102);
+        //BitCoin Beggar
+        rect(230, 40, 45, 45);
+        image(Apps.icon3, 230, 22, 47, 64);
+        text(Apps.name3, 218, 102);
+        //Minipolis
+        rect(60, 120, 45, 45);
+        image(Apps.icon4, 60, 100, 45, 67);
+        text(Apps.name4, 60, 180);
+        //Khan Academy
+        rect(145, 120, 45, 45);
+        image(Apps.icon5, 145, 120, 45, 45);
+        text(Apps.name5, 130, 180);
+        playSound(getSound("rpg/metal-clink"));
+        fill(0, 0, 0);
+    }
+    MKhome();
+    MPShome();
+    KAhome();
+};
